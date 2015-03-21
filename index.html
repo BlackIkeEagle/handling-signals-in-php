@@ -104,6 +104,145 @@
 
                 </section>
 
+                <section>
+
+                    <section data-background='assets/wave.jpg'>
+                        <aside class='notes'>
+                            <ul>
+                                <li>Now we will go to the point we will handle signals</li>
+                                <li>What can we handle in PHP</li>
+                                <li>and how we will do it</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2>Signals we can catch in <span style="color: rgb(136, 146, 191);">PHP</span></h2>
+                        <div>
+                            <div class="fragment" style="width: 48%; display: inline-block; margin-right: 2%; vertical-align: top;">
+                                <ul>
+                                    <li>SIGHUP</li>
+                                    <li>SIGINT</li>
+                                    <li>SIGUSR1</li>
+                                    <li>SIGUSR2</li>
+                                    <li>SIGQUIT</li>
+                                    <li>SIGILL</li>
+                                    <li>SIGABRT</li>
+                                    <li>SIGFPE</li>
+                                    <li>SIGSEGV</li>
+                                </ul>
+                            </div>
+                            <div class="fragment" style="width: 48%; display: inline-block;">
+                                <ul>
+                                    <li>SIGPIPE</li>
+                                    <li>SIGALRM</li>
+                                    <li>SIGTERM</li>
+                                    <li>SIGCHLD</li>
+                                    <li>SIGCONT</li>
+                                    <li>SIGTSTP</li>
+                                    <li>SIGTTIN</li>
+                                    <li>SIGTTOU</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <aside class='notes'>
+                            <ul>
+                                <li>There are 17 signals we can catch</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2 style="color: rgb(136, 146, 191);">Ticks</h2>
+                        <p class="fragment">
+                           can be described as events that can happen between the normal execution of the code 
+                        </p>
+                        <p>
+                        <br />
+                        </p>
+                        <div style="width: 62%; display: inline-block; margin-right: 2%; vertical-align: top;"></div>
+                        <div style="width: 35%; display: inline-block;">
+                            <div class="fragment" style="text-align: left">
+                                <span style="color: #5FBA7A">declare</span>(ticks = <span style="color: #BA5F9F">1</span>);
+                            </div>
+                            <p>
+                            </p>
+                            <div class="fragment" style="text-align: left">
+                                <span style="color: #5FBA7A">declare</span>(ticks = <span style="color: #BA5F9F">1</span>) {
+                                <br />
+                                <span style="color: #5F9FBA">&nbsp;&nbsp;&nbsp;&nbsp;&sol;&sol; in scope</span>
+                                <br />
+                                }
+                                <br />
+                                <span style="color: #5F9FBA">&sol;&sol; out scope</span>
+                            </div>
+                        </div>
+                        <aside class='notes'>
+                            <ul>
+                                <li>first declare ticks</li>
+                                <li>tick is event on every X low level statements</li>
+                                <li>not everything is tickable</li>
+                                <li>declare for entire file</li>
+                                <li>for specific scope</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <blockquote cite="http://php.net/manual/en/control-structures.declare.php">
+                            "A tick is an event that occurs for every N low-level tickable statements executed by the parser within the declare block. The value for N is specified using ticks=N within the declare block's directive section.
+                        </blockquote>
+                        <blockquote cite="http://php.net/manual/en/control-structures.declare.php">
+                            "Not all statements are tickable. Typically, condition expressions and argument expressions are not tickable."
+                        </blockquote>
+                        <p><small><a href="http://php.net/manual/en/control-structures.declare.php">http://php.net/manual/en/control-structures.declare.php</a></small></p>
+                        <aside class='notes'>
+                            <ul>
+                                <li>You can read this later</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2 style="color: rgb(136, 146, 191);">Ticks</h2>
+                        <p class="fragment" style="text-align: left;">
+                            ticks set to a low value gives you much control but has a performance impact
+                        </p>
+                        <p>
+                        <br />
+                        </p>
+                        <p class="fragment" style="text-align: right;">
+                            ticks set to a  high value give you less control but impact performance less
+                        </p>
+                        <aside class='notes'>
+                            <ul>
+                                <li>1 is the lowest, at every possible tick</li>
+                                <li>higher will lead to slower response to the signal</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2>Alternative</h2>
+                        <p class="fragment" style="text-align: left;">You can manually set in your code when the signals can be handled</p>
+                        <p>
+                        <br />
+                        </p>
+                        <div style="width: 62%; display: inline-block; margin-right: 2%; vertical-align: top;"></div>
+                        <div style="width: 35%; display: inline-block;">
+                            <div class="fragment" style="text-align: left">
+                                <span style="color: #5FBA7A">pcntl_signal_dispatch</span>();
+                            </div>
+                        </div>
+                        <aside class='notes'>
+                            <ul>
+                                <li>there is no need to declare ticks when you use pcntl_signal_dispatch</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                </section>
+
 				<section>
                     <div style="width: 50%; display: inline-block; margin-right: 2%; vertical-align: top;">
 					<h2>Thanks.</h2>
