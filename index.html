@@ -48,6 +48,62 @@
                     <h1 style="text-align: right;">in <span style="color: rgb(136, 146, 191);">PHP</span></h1>
 				</section>
 
+                <section>
+
+                    <section data-background='assets/signals-from-space.jpg'>
+                        <aside class='notes'>
+                            <ul>
+                                <li>Signals, wtf zijn signals</li>
+                                <li>Signals, limited form of ipc</li>
+                                <li>Signals, os interrupts target process to deliver signal</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <blockquote cite="http://en.wikipedia.org/wiki/Unix_signal">
+                            "Signals are a limited form of inter-process communication used in Unix, Unix-like, and other POSIX-compliant operating systems. A signal is an asynchronous notification sent to a process or to a specific thread within the same process in order to notify it of an event that occurred. Signals have been around since the 1970s Bell Labs Unix and have been more recently specified in the POSIX standard."
+                        </blockquote>
+                        <p><small><a href="http://en.wikipedia.org/wiki/Unix_signal">http://en.wikipedia.org/wiki/Unix_signal</a></small></p>
+                        <aside class='notes'>
+                            <ul>
+                                <li>You can read this later</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <blockquote cite="http://en.wikipedia.org/wiki/Unix_signal">
+                            "When a signal is sent, the operating system interrupts the target process's normal flow of execution to deliver the signal. Execution can be interrupted during any non-atomic instruction. If the process has previously registered a signal handler, that routine is executed. Otherwise, the default signal handler is executed."
+                        </blockquote>
+                        <p><small><a href="http://en.wikipedia.org/wiki/Unix_signal">http://en.wikipedia.org/wiki/Unix_signal</a></small></p>
+                        <aside class='notes'>
+                            <ul>
+                                <li>You can read this later</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2>Some known ways to send signals</h2>
+                        <ul style="float: left">
+                            <li class="fragment">Ctrl-C</li>
+                            <li class="fragment">Ctrl-Z</li>
+                            <li class="fragment">Ctrl-\</li>
+                            <li class="fragment">The <span class='highlight'>kill</span> command</li>
+                        </ul>
+                        <aside class='notes'>
+                            <ul>
+                                <li>Ctrl-C sends INT signal (SIGINT) terminating the running process</li>
+                                <li>Ctrl-Z sends TSTP signal (SIGTSTP) suspending the running process</li>
+                                <li>Ctrl-\ sends QUIT signal (SIGQUIT) terminating the running process and normally dumping core</li>
+                                <li>The kill command / kill -s SIGNAL PID</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                </section>
+
 				<section>
                     <div style="width: 50%; display: inline-block; margin-right: 2%; vertical-align: top;">
 					<h2>Thanks.</h2>
