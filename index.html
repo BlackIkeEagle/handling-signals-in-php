@@ -243,6 +243,156 @@
 
                 </section>
 
+                <section>
+
+                    <section data-background='assets/YEAR_0.jpg'>
+                        <aside class='notes'>
+                            <ul>
+                                <li>Handling them for real now :)</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2>Signal handler</h2>
+                        <div style="width: 27%; display: inline-block; margin-right: 2%; vertical-align: top;"></div>
+                        <div style="width: 71%; display: inline-block;">
+                            <div class="fragment" style="text-align: left">
+                                <span style="color: #5FBA7A">pcntl_signal</span>(SIGNAL, <span style="color: #BA5F9F">'signalhandler'</span>);
+                            </div>
+                            <p>
+                            </p>
+                            <div class="fragment" style="text-align: left">
+                                <span style="color: #BA5F9F">function</span>&nbsp;<span style="color: #5FBA7A">signalhandler</span>(<span style="color: #BA5F9F">$</span>signal) {
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #5FBA7A">echo</span>&nbsp;<span style="color: #BA5F9F">'Caught a signal'</span>;
+                                <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #5FBA7A">return</span>;
+                                <br />
+                                }
+                            </div>
+                        </div>
+                        <aside class='notes'>
+                            <ul>
+                                <li>we must use pcntl_signal to define what function/method to use for the signal</li>
+                                <li>and then ofcourse implement that method</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section data-background="#fdf6e3">
+                                <h2 style="color: #002b36">Handling a signal (ticks)</h2>
+<pre class="fragment vimCodeElement">
+<span id="L1" class="LineNr"> 1 </span><span class="Special">&lt;?php</span>
+<span id="L2" class="LineNr"> 2 </span>
+<span id="L3" class="LineNr"> 3 </span><span class="Statement">declare</span><span class="Special">(</span>ticks <span class="Statement">=</span> <span class="Constant">1</span><span class="Special">)</span>;
+<span id="L4" class="LineNr"> 4 </span>
+<span id="L5" class="LineNr"> 5 </span><span class="Identifier">pcntl_signal</span><span class="Special">(</span>SIGINT, '<span class="Constant">signalhandler</span>'<span class="Special">)</span>;
+<span id="L6" class="LineNr"> 6 </span>
+<span id="L7" class="LineNr"> 7 </span><span class="PreProc">function</span> signalhandler<span class="Special">(</span><span class="Statement">$</span><span class="Identifier">signal</span><span class="Special">)</span>
+<span id="L8" class="LineNr"> 8 </span><span class="Special">{</span>
+<span id="L9" class="LineNr"> 9 </span>    <span class="PreProc">echo</span> '<span class="Constant">Caught signal </span>' <span class="Statement">.</span> <span class="Statement">$</span><span class="Identifier">signal</span> <span class="Statement">.</span> PHP_EOL;
+<span id="L10" class="LineNr">10 </span>    <span class="Statement">return</span>;
+<span id="L11" class="LineNr">11 </span><span class="Special">}</span>
+<span id="L12" class="LineNr">12 </span>
+<span id="L13" class="LineNr">13 </span><span class="Comment">// keep on running so we can actually send a signal ;)</span>
+<span id="L14" class="LineNr">14 </span><span class="Statement">while</span> <span class="Special">(</span><span class="Constant">true</span><span class="Special">)</span> <span class="Special">{</span>
+<span id="L15" class="LineNr">15 </span><span class="Special">}</span>
+</pre>
+                    </section>
+
+                    <section data-background="#fdf6e3">
+                        <h2 style="color: #002b36">Handling a signal (dispatch)</h2>
+<pre class='fragment vimCodeElement'>
+<span id="L1" class="LineNr"> 1 </span><span class="Special">&lt;?php</span>
+<span id="L2" class="LineNr"> 2 </span>
+<span id="L3" class="LineNr"> 3 </span><span class="Identifier">pcntl_signal</span><span class="Special">(</span>SIGINT, '<span class="Constant">signalhandler</span>'<span class="Special">)</span>;
+<span id="L4" class="LineNr"> 4 </span>
+<span id="L5" class="LineNr"> 5 </span><span class="PreProc">function</span> signalhandler<span class="Special">(</span><span class="Statement">$</span><span class="Identifier">signal</span><span class="Special">)</span>
+<span id="L6" class="LineNr"> 6 </span><span class="Special">{</span>
+<span id="L7" class="LineNr"> 7 </span>    <span class="PreProc">echo</span> '<span class="Constant">Caught signal </span>' <span class="Statement">.</span> <span class="Statement">$</span><span class="Identifier">signal</span> <span class="Statement">.</span> PHP_EOL;
+<span id="L8" class="LineNr"> 8 </span>    <span class="Statement">return</span>;
+<span id="L9" class="LineNr"> 9 </span><span class="Special">}</span>
+<span id="L10" class="LineNr">10 </span>
+<span id="L11" class="LineNr">11 </span><span class="Comment">// keep on running so we can actually send a signal ;)</span>
+<span id="L12" class="LineNr">12 </span><span class="Statement">while</span> <span class="Special">(</span><span class="Constant">true</span><span class="Special">)</span> <span class="Special">{</span>
+<span id="L13" class="LineNr">13 </span>    pcntl_signal_dispatch<span class="Special">()</span>;
+<span id="L14" class="LineNr">14 </span><span class="Special">}</span>
+</pre>
+                    </section>
+
+                    <section>
+                        <h2 style="color: #FF6666">Wow that's some nasty code</h2>
+                        <aside class='notes'>
+                            <ul>
+                                <li>You can be an asshole and make your program allmost unkillable</li>
+                                <li>Dont!!!</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2 style="text-align: center">Interesting usecase: <span style="color: rgb(136, 146, 191);">Alarms</span></h2>
+                        <p class="fragment" style="text-align: left;">
+                            We can send the SIGALRM signal from within our script
+                        </p>
+                        <p>
+                        <br />
+                        </p>
+                        <p class="fragment" style="text-align: right;">
+                            Could be a very nice trick to show progress
+                        </p>
+                        <p>
+                        <br />
+                        </p>
+                        <div style="width: 62%; display: inline-block; margin-right: 2%; vertical-align: top;"></div>
+                        <div style="width: 35%; display: inline-block;">
+                            <div class="fragment" style="text-align: left">
+                                <span style="color: #5FBA7A">pcntl_alarm</span>(interval);
+                            </div>
+                        </div>
+                        <aside class='notes'>
+                            <ul>
+                                <li>pcntl_alarm sends periodic SIGALRM</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section data-background="#fdf6e3">
+                        <h2 style="color: #002b36">Alarm !</h2>
+<pre class='fragment vimCodeElement'>
+<span id="L1" class="LineNr"> 1 </span><span class="Special">&lt;?php</span>
+<span id="L2" class="LineNr"> 2 </span>
+<span id="L3" class="LineNr"> 3 </span><span class="Statement">declare</span><span class="Special">(</span>ticks <span class="Statement">=</span> <span class="Constant">1</span><span class="Special">)</span>;
+<span id="L4" class="LineNr"> 4 </span>
+<span id="L5" class="LineNr"> 5 </span><span class="Identifier">pcntl_signal</span><span class="Special">(</span>SIGALRM, '<span class="Constant">alarmhandler</span>'<span class="Special">)</span>;
+<span id="L6" class="LineNr"> 6 </span>pcntl_alarm<span class="Special">(</span><span class="Constant">5</span><span class="Special">)</span>; <span class="Comment">// SIGALRM after 5 seconds</span>
+<span id="L7" class="LineNr"> 7 </span>
+<span id="L8" class="LineNr"> 8 </span><span class="PreProc">function</span> alarmhandler<span class="Special">(</span><span class="Statement">$</span><span class="Identifier">signal</span><span class="Special">)</span>
+<span id="L9" class="LineNr"> 9 </span><span class="Special">{</span>
+<span id="L10" class="LineNr">10 </span>    <span class="PreProc">echo</span> &quot;<span class="Constant">Alarm !</span>&quot; <span class="Statement">.</span> PHP_EOL;
+<span id="L11" class="LineNr">11 </span>    <span class="PreProc">echo</span> &quot;<span class="Constant">Periodic progress output ?</span>&quot; <span class="Statement">.</span> PHP_EOL;
+<span id="L12" class="LineNr">12 </span>    pcntl_alarm<span class="Special">(</span><span class="Constant">5</span><span class="Special">)</span>; <span class="Comment">// we want it every 5 seconds so set again</span>
+<span id="L13" class="LineNr">13 </span>    <span class="Statement">return</span>;
+<span id="L14" class="LineNr">14 </span><span class="Special">}</span>
+<span id="L15" class="LineNr">15 </span>
+<span id="L16" class="LineNr">16 </span><span class="Comment">// keep on running so we can actually send a signal ;)</span>
+<span id="L17" class="LineNr">17 </span><span class="Statement">while</span> <span class="Special">(</span><span class="Constant">true</span><span class="Special">)</span> <span class="Special">{</span>
+<span id="L18" class="LineNr">18 </span><span class="Special">}</span>
+</pre>
+                    </section>
+
+                    <section>
+                        <h2>Extra signal functionality</h2>
+                        <ul>
+                            <li><span style="color: #5FBA7A">pcntl_sigprocmask</span> (un)block specific signals</li>
+                            <li><span style="color: #5FBA7A">pcntl_sigwaitinfo</span> suspend execution until a set of signals is received</li>
+                            <li><span style="color: #5FBA7A">pcntl_sigtimedwait</span> suspend execution and wait for signals with timeout</li>
+                        </ul>
+                    </section>
+
+                </section>
+
 				<section>
                     <div style="width: 50%; display: inline-block; margin-right: 2%; vertical-align: top;">
 					<h2>Thanks.</h2>
