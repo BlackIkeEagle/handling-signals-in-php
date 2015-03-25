@@ -1,0 +1,6 @@
+- Add some additional information about signals
+- explain there is an agreement to handle certain signals in a specific way
+
+also see:
+http://en.wikipedia.org/wiki/Unix_signal
+http://en.wikipedia.org/wiki/Single_UNIX_Specification
